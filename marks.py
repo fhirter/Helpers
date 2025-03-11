@@ -1,9 +1,5 @@
+import argparse
 import csv
-
-print('supply path for notenblatt')
-
-# Path to your CSV file
-csv_file = input()
 
 def calculate_marks(csv_file):
     try:
@@ -40,5 +36,15 @@ def calculate_marks(csv_file):
         print("An error occurred:", e)
 
 
-# Call the function with the path to your CSV file
-calculate_marks(csv_file)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Calculate marks from a CSV file.")
+    parser.add_argument("csv_file", type=str, help="Path to the CSV file containing grades")
+
+    args = parser.parse_args()
+
+    file = args.csv_file
+    if file == "":
+        file = "notenblatt.csv"
+
+    # Call the function with the path to your CSV file
+    calculate_marks(file)

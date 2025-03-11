@@ -29,7 +29,7 @@ case "$command" in
       "$script_dir/setup_directory.sh"
       ;;
   marks)
-      "python3" "$script_dir/marks.py"
+      "python3" "$script_dir/marks.py" "$option"
       ;;
    *)
        echo "Unknown command: $1"
