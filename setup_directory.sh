@@ -19,7 +19,7 @@ if [ ! -f "$FILE_TO_COPY" ]; then
 fi
 
 # Skip the first line of the CSV file and read each subsequent line
-tail -n +2 "$CSV_FILE" | while IFS= read -r line || [ -n "$line" ]
+tail -n +3 "$CSV_FILE" | while IFS= read -r line || [ -n "$line" ]
 do
   # Extract the first field from the CSV (the name) before the first comma
   DIR_NAME=$(echo "$line" | cut -d',' -f1 | sed 's/[^a-zA-Z0-9 ]//g' | xargs)
@@ -49,4 +49,4 @@ do
   mv -n "$TEMP_FILE" "$DIR_NAME/$FILE_TO_COPY"
   echo "File copied to: $DIR_NAME/$FILE_TO_COPY"
 
-done < "$CSV_FILE"
+done
