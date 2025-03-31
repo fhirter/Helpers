@@ -39,7 +39,7 @@ for i in "${!headings[@]}"; do
         echo "" >> "$output_file"
         # Write the corresponding score right after the subheading
         # Adjust the format here as necessary
-        echo "0/${scores[$i]}" >> "$output_file"
+        echo "0/${scores[$i]//[[:space:]]/}" >> "$output_file"
         echo "" >> "$output_file"
     fi
 done
