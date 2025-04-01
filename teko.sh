@@ -8,6 +8,7 @@ if [ $# -eq 0 ] || [ $# -gt 3 ]; then
    echo "  render: render markdown to pdf"
    echo "  dir: create directories from notenblatt file"
    echo "  marks: calculate marks and point from notenblatt file"
+   echo "  print <filename>: print all files called <filename> from all subdirectories"
    echo "  notenblatt: create notenblatt using marks from Bewertungsraster.md. Usage: \`teko notenblatt notenblatt.csv Bewertungsraster.md\`"
    exit 1
 fi
@@ -32,6 +33,9 @@ case "$command" in
       ;;
   marks)
       "python3" "$script_dir/marks.py" "$option1"
+      ;;
+  print)
+      "$script_dir/print.sh" "$option1"
       ;;
   notenblatt)
       "$script_dir/create_notenblatt.sh" "$option1" "$option2"
