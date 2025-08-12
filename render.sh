@@ -22,7 +22,7 @@ convert_md_to_pdf() {
 
     pandoc "$markdown_file" \
         -o "$output_dir/$filename_noext.pdf" \
-        --pdf-engine=xelatex \
+        --pdf-engine=lualatex \
         -H "$script_dir/header.sty"
 
     echo "Converted $markdown_file to $output_dir/$filename_noext.pdf"
