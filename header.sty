@@ -1,9 +1,14 @@
-\usepackage[a4paper, top=1.5cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
+\RequirePackage[a4paper, top=1.5cm, bottom=2cm, left=1.5cm, right=1.5cm]{geometry}
 \renewcommand{\arraystretch}{2}
 
 \RequirePackage{titlesec}
 \RequirePackage{titling}
 \RequirePackage{fontspec}
+
+\RequirePackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % clear default header/footer
+
 
 \defaultfontfeatures{Scale=MatchLowercase}
 
@@ -21,3 +26,14 @@
     {\large\bfseries\headingfont}{\thesubsubsection}{1em}{}
 \titleformat{\paragraph}
     {\normalsize\bfseries\headingfont}{\theparagraph}{1em}{}
+
+\makeatletter
+\fancyfoot[L]{\footnotesize \@author}
+\fancyfoot[C]{\footnotesize \thepage}
+\fancyfoot[R]{\footnotesize \@date}
+\makeatother
+
+% Remove the header rule (fine line at the top)
+\renewcommand{\headrulewidth}{0pt}
+% Keep a footer rule (set to 0pt if you also want it removed)
+\renewcommand{\footrulewidth}{0.4pt}
