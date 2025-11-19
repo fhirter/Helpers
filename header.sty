@@ -6,6 +6,7 @@
 \RequirePackage{fontspec}
 
 \RequirePackage{fancyhdr}
+\RequirePackage{lastpage}
 \pagestyle{fancy}
 \fancyhf{} % clear default header/footer
 
@@ -29,7 +30,7 @@
 
 \makeatletter
 \fancyfoot[L]{\footnotesize \@author}
-\fancyfoot[C]{\footnotesize \thepage}
+\fancyfoot[C]{\footnotesize \thepage/\pageref{LastPage}}
 \fancyfoot[R]{\footnotesize \@date}
 \makeatother
 
