@@ -39,17 +39,4 @@
 % Keep a footer rule (set to 0pt if you also want it removed)
 \renewcommand{\footrulewidth}{0.4pt}
 
-% logo
-\RequirePackage{geometry}
-\RequirePackage{eso-pic}
-\RequirePackage{graphicx}
 
-\graphicspath{
-        {/Users/fabian/PycharmProjects/Helpers/Logos}
-}
-
-\AddToShipoutPictureBG*{
-    \AtTextUpperLeft{%
-        \put(-0.5cm,0cm){\includegraphics[width=5cm]{TEKO_Logo_pos_quer_4f.png}}
-    }%
-}%

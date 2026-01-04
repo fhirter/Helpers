@@ -23,8 +23,9 @@ convert_md_to_pdf() {
     pandoc "$markdown_file" \
         -o "$output_dir/$filename_noext.pdf" \
         --pdf-engine=lualatex \
-        --lua-filter="$script_dir/table.lua" \
-        -H "$script_dir/header.sty"
+        -H "$script_dir/general_header.sty" \
+        -H "$script_dir/teko_header.sty"
+        #--lua-filter="$script_dir/table.lua" \
 
     echo "Converted $markdown_file to $output_dir/$filename_noext.pdf"
 }
