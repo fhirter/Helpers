@@ -6,6 +6,7 @@ if [ $# -eq 0 ] || [ $# -gt 3 ]; then
    echo "Available commands:"
    echo "  bewertungsraster: create bewertungsraster markdown file"
    echo "  render: render markdown to pdf"
+   echo "  publish: render markdown to html"
    echo "  dir: create directories from notenblatt file"
    echo "  marks: calculate marks and point from notenblatt file"
    echo "  print <filename>: print all files called <filename> from all subdirectories"
@@ -27,6 +28,10 @@ case "$command" in
    render)
        script_dir="$(dirname "$0")"
        "$script_dir/render.sh" "$option1"
+       ;;
+   publish)
+       script_dir="$(dirname "$0")"
+       "$script_dir/publish.sh" "$option1" "$option2"
        ;;
   dir)
       "$script_dir/setup_directory.sh"
