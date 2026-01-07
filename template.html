@@ -18,23 +18,29 @@ $if(description-meta)$
 $endif$
   <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
   <style>
-    $styles.html()$
-
     html {
-        font-family: arial, sans-serif
+      font-family: arial, sans-serif;
+      min-height: 100vh;
+      background: hsl(217 35 85%);
+
     }
 
     body {
-          max-width: 50em;
+      max-width: 50em;
+      margin: 0 auto ;
+
+                    background: hsl(217 35 95%);
+              padding: 2rem;
+              border-radius: 8px;
     }
 
     table {
-        border-collapse: collapse;
+      border-collapse: collapse;
     }
 
-    table td {
-        border: solid thin black;
-        padding: 5px;
+    table td,th {
+      border: solid thin black;
+      padding: 5px;
     }
 
   </style>
