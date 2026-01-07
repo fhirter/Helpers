@@ -12,6 +12,8 @@ fi
 INPUT_DIR="$1"
 OUTPUT_DIR="$2"
 
+script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 # Check if input directory exists
 if [ ! -d "$INPUT_DIR" ]; then
     echo "Error: Input directory '$INPUT_DIR' does not exist."
@@ -33,7 +35,7 @@ find "$INPUT_DIR" -type f -name "*.md" | while read -r md_file; do
 
     # Run pandoc conversion
     # --standalone creates a full HTML file (with <head>, <body>, etc.)
-    pandoc "$md_file" -s -o "$html_file" --template template.html
+    pandoc "$md_file" -s -o "$html_file" --template "$script_dir/template.html"
 done
 
 echo "Done!"
