@@ -20,6 +20,13 @@ if [ ! -d "$INPUT_DIR" ]; then
     exit 1
 fi
 
+# Ensure output directory exists
+mkdir -p "$OUTPUT_DIR"
+
+# Copy all non-Markdown files recursively, preserving directory structure
+# (Markdown files will be converted to HTML below)
+rsync -a --exclude='*.md' "$INPUT_DIR"/ "$OUTPUT_DIR"/
+
 # Use find to recursively locate all .md files
 find "$INPUT_DIR" -type f -name "*.md" | while read -r md_file; do
     # Calculate the relative path from the input directory
