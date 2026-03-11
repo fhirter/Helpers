@@ -1,5 +1,7 @@
 import argparse
 import csv
+from statistics import median
+
 
 def calculate_marks(csv_file):
     try:
@@ -13,6 +15,9 @@ def calculate_marks(csv_file):
             max_total_score = sum(max_scores)
 
             print("Name, Total Score, Mark")
+            print("-----------------------")
+
+            marks = []
 
             for row in reader:
                 # Calculate total score for each student based on "Max" scores
@@ -25,10 +30,14 @@ def calculate_marks(csv_file):
 
                 mark = round(total_score / max_total_score * 5 + 1, 1)  # Calculate mark
 
+                marks.append(mark)
+
                 # Print name, total score, and mark
                 print(f"{row[0]}, {total_score}, {mark}")
 
-            print(f"max score: {max_total_score}")
+            print(f"\nmax score: {max_total_score}")
+            print(f"average: {round(sum(marks) / len(marks), 2)}")
+            print(f"median: {round(median(marks), 2)}")
 
     except FileNotFoundError:
         print(f"File {csv_file} not found.")
