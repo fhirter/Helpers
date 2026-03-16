@@ -16,8 +16,12 @@ echo "$dir"
 # Write the main heading to the markdown file
 echo "# Bewertungsraster $current_directory" > "$output_file"
 echo "" >> "$output_file"
-echo "- Total Punkte: <total>" >> "$output_file"
-echo "- Note: <note>" >> "$output_file"
+echo "- Total Punkte: " >> "$output_file"
+echo "- Note: " >> "$output_file"
+echo "" >> "$output_file"
+echo "## Allgemeine Rückmeldungen" >> "$output_file"
+echo "" >> "$output_file"
+echo "## Bewertung" >> "$output_file"
 echo "" >> "$output_file"
 
 # Read the CSV file line by line
@@ -35,7 +39,7 @@ for i in "${!headings[@]}"; do
         continue # Skip the first column, assuming it's "Name" or similar
     else
         # Write the subheading
-        echo "## ${headings[$i]}" >> "$output_file"
+        echo "### ${headings[$i]}" >> "$output_file"
         echo "" >> "$output_file"
         # Write the corresponding score right after the subheading
         # Adjust the format here as necessary
