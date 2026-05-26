@@ -34,6 +34,9 @@ sudo tlmgr install titling lastpage titlesec lualatex-math
 
 ## Todo
 
+- add go binary
+- add flags for render script
+
 - `teko marks` should work with quotes in the chapter headers.
 - This can be used to convert all bewertungsraster to pdf:
 
