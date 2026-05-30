@@ -25,7 +25,7 @@ convert_md_to_pdf() {
         --pdf-engine=lualatex \
         -H "$script_dir/general_header.sty" \
         -H "$script_dir/teko_header.sty"
-        #--lua-filter="$script_dir/table.lua" \
+    #    --lua-filter="$script_dir/table.lua"
 
     echo "Converted $markdown_file to $output_dir/$filename_noext.pdf"
 }
@@ -54,36 +54,57 @@ add_yaml_metadata() {
         git_date="$(git log -1 --follow --date=short --format=%ad -- "$file" 2>/dev/null || true)"
     fi
 
-    # Write the new YAML front matter
-    {
-        printf '%s\n' '---'
-        printf 'author: "%s"\n' "$git_author"
-        printf 'date: "%s"\n' "$git_date"
-        printf '%s\n' '---'
-    } > "$tmp"
-
     # Determine if the file already has front matter
     local first_nonempty
     first_nonempty="$(awk 'NF{print; exit}' "$file" 2>/dev/null || true)"
 
+    local end_line=""
     if printf '%s' "$first_nonempty" | grep -qE '^\s*---\s*$'; then
         # Find the closing delimiter line number for the existing front matter (--- or ...)
-        local end_line
         end_line="$(awk '
             BEGIN { start=0 }
             $0 ~ /^[[:space:]]*---[[:space:]]*$/ && start==0 { start=1; next }   # first ---
             start==1 && ($0 ~ /^[[:space:]]*---[[:space:]]*$/ || $0 ~ /^[[:space:]]*\.\.\.[[:space:]]*$/) { print NR; exit }  # closing --- or ...
         ' "$file")"
+    fi
 
-        if [ -n "${end_line:-}" ]; then
-            # Append the content after the closing delimiter to the temp file
-            tail -n +"$((end_line + 1))" "$file" >> "$tmp"
-        else
-            # Malformed front matter (no closing delimiter) — fall back to prepending new header
-            cat "$file" >> "$tmp"
-        fi
+    if [ -n "${end_line:-}" ]; then
+        # Extract existing front matter body (between the delimiters)
+        local existing_fm
+        existing_fm="$(sed -n "2,$((end_line - 1))p" "$file")"
+
+        # Check for existing top-level title/author keys
+        local has_title has_author
+        has_title="$(printf '%s\n' "$existing_fm" | grep -cE '^[[:space:]]*title[[:space:]]*:' || true)"
+        has_author="$(printf '%s\n' "$existing_fm" | grep -cE '^[[:space:]]*author[[:space:]]*:' || true)"
+
+        # Build merged front matter
+        {
+            printf '%s\n' '---'
+            if [ "${has_title:-0}" -eq 0 ]; then
+                printf 'title: "%s"\n' "$title"
+            fi
+            if [ "${has_author:-0}" -eq 0 ]; then
+                printf 'author: "%s"\n' "$git_author"
+            fi
+            printf 'date: "%s"\n' "$git_date"
+            # Preserve existing front matter, but drop any prior date: line
+            # (title/author are kept as-is if present)
+            printf '%s\n' "$existing_fm" | grep -vE '^[[:space:]]*date[[:space:]]*:' || true
+            printf '%s\n' '---'
+        } > "$tmp"
+
+        # Append the content after the closing delimiter to the temp file
+        tail -n +"$((end_line + 1))" "$file" >> "$tmp"
     else
-        # No front matter — just prepend the new header
+        # No front matter (or malformed) — write a fresh header and prepend original content
+        {
+            printf '%s\n' '---'
+            printf 'title: "%s"\n' "$title"
+            printf 'author: "%s"\n' "$git_author"
+            printf 'date: "%s"\n' "$git_date"
+            printf '%s\n' '---'
+        } > "$tmp"
         cat "$file" >> "$tmp"
     fi
 
