@@ -24,8 +24,8 @@ convert_md_to_pdf() {
         -o "$output_dir/$filename_noext.pdf" \
         --pdf-engine=lualatex \
         -H "$script_dir/general_header.sty" \
-        -H "$script_dir/teko_header.sty"
-    #    --lua-filter="$script_dir/table.lua"
+        -H "$script_dir/teko_header.sty" \
+        --lua-filter="$script_dir/table.lua"
 
     echo "Converted $markdown_file to $output_dir/$filename_noext.pdf"
 }
@@ -128,7 +128,7 @@ for input_path in "$@"; do
         fi
     elif [ -f "$input_path" ]; then
         echo "Processing file: $input_path"
-        add_yaml_metadata "$input_path"
+       # add_yaml_metadata "$input_path"
         convert_md_to_pdf "$input_path"
     else
         echo "Path does not exist or is not accessible: $input_path" >&2
