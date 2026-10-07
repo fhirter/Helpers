@@ -42,7 +42,7 @@ find "$INPUT_DIR" -type f -name "*.md" | while read -r md_file; do
 
     # Run pandoc conversion
     # --standalone creates a full HTML file (with <head>, <body>, etc.)
-    pandoc "$md_file" -s -o "$html_file" --template "$script_dir/template.html"
+    pandoc "$md_file" -s -o "$html_file" --template "$script_dir/templates/publish/template.html"
 done
 
 echo "Done!"
