@@ -56,7 +56,7 @@ var bewertungsrasterCmd = &cobra.Command{
 	Short: "Create bewertungsraster markdown file",
 	Long:  `Create bewertungsraster markdown file by running create_bewertungsraster.sh`,
 	Run: func(cmd *cobra.Command, args []string) {
-		runScript("create_bewertungsraster.sh")
+		runScript("scripts/create_bewertungsraster.sh")
 	},
 }
 

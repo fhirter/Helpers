@@ -19,7 +19,7 @@ var renderCmd = &cobra.Command{
 		if len(args) > 0 {
 			option1 = args[0]
 		}
-		runScript("render.sh", option1)
+		runScript("scripts/render.sh", option1)
 	},
 }
 

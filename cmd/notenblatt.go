@@ -22,7 +22,7 @@ var notenblattCmd = &cobra.Command{
 		if len(args) > 1 {
 			option2 = args[1]
 		}
-		runScript("create_notenblatt.sh", option1, option2)
+		runScript("scripts/create_notenblatt.sh", option1, option2)
 	},
 }
 

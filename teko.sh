@@ -17,33 +17,33 @@ fi
 command="$1"
 option1="$2"
 option2="$3"
-script_dir="$(dirname "$0")"
+root_dir="$(dirname "$0")"
 
 # Run the appropriate script based on the argument
 case "$command" in
    bewertungsraster)
-       script_dir="$(dirname "$0")"
-       "$script_dir/create_bewertungsraster.sh"
+       root_dir="$(dirname "$0")"
+       "$root_dir/scripts/create_bewertungsraster.sh"
        ;;
    render)
-       script_dir="$(dirname "$0")"
-       "$script_dir/render.sh" "$option1"
+       root_dir="$(dirname "$0")"
+       "$root_dir/scripts/render.sh" "$option1"
        ;;
    publish)
-       script_dir="$(dirname "$0")"
-       "$script_dir/publish.sh" "$option1" "$option2"
+       root_dir="$(dirname "$0")"
+       "$root_dir/scripts/publish.sh" "$option1" "$option2"
        ;;
   dir)
-      "$script_dir/setup_directory.sh"
+      "$root_dir/scripts/setup_directory.sh"
       ;;
   marks)
-      "python3" "$script_dir/marks.py" "$option1"
+      "python3" "$root_dir/scripts/marks.py" "$option1"
       ;;
   print)
-      "$script_dir/print.sh" "$option1"
+      "$root_dir/scripts/print.sh" "$option1"
       ;;
   notenblatt)
-      "$script_dir/create_notenblatt.sh" "$option1" "$option2"
+      "$root_dir/scripts/create_notenblatt.sh" "$option1" "$option2"
       ;;
    *)
        echo "Unknown command: $1"

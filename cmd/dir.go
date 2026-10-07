@@ -15,7 +15,7 @@ var dirCmd = &cobra.Command{
 	Short: "Create directories from notenblatt file",
 	Long:  `Create directories from notenblatt file by running setup_directory.sh`,
 	Run: func(cmd *cobra.Command, args []string) {
-		runScript("setup_directory.sh")
+		runScript("scripts/setup_directory.sh")
 	},
 }
 

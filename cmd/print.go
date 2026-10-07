@@ -19,7 +19,7 @@ var printCmd = &cobra.Command{
 		if len(args) > 0 {
 			option1 = args[0]
 		}
-		runScript("print.sh", option1)
+		runScript("scripts/print.sh", option1)
 	},
 }
 

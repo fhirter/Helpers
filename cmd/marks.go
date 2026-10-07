@@ -19,7 +19,7 @@ var marksCmd = &cobra.Command{
 		if len(args) > 0 {
 			option1 = args[0]
 		}
-		runPython("marks.py", option1)
+		runPython("scripts/marks.py", option1)
 	},
 }
 

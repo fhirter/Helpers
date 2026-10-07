@@ -22,7 +22,7 @@ var publishCmd = &cobra.Command{
 		if len(args) > 1 {
 			option2 = args[1]
 		}
-		runScript("publish.sh", option1, option2)
+		runScript("scripts/publish.sh", option1, option2)
 	},
 }
 
