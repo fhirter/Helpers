@@ -11,6 +11,13 @@
 
 ## Installation
 
+run `install_macos.sh` or do it manually:
+
+- Compile: `go build -o bin/teko .`
+- Install (macOS): `sudo cp bin/teko /usr/local/bin/teko`
+
+### Legacy Shell Scripts
+
 1. Install by adding to `.zshrc`:
 ```shell
 #!/usr/bin/env bash
