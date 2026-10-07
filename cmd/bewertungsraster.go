@@ -4,7 +4,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// bewertungsrasterCmd represents the bewertungsraster command
 var bewertungsrasterCmd = &cobra.Command{
 	Use:   "bewertungsraster",
 	Short: "Create bewertungsraster markdown file",
