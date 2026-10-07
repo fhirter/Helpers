@@ -6,6 +6,6 @@ go build -o bin/teko .
 
 echo "Moving to app folder..."
 
-sudo cp bin/teko /usr/local/bin/teko
+sudo mv bin/teko /usr/local/bin/teko
 
 echo "Done!"
