@@ -5,6 +5,7 @@ set -o nounset   # abort on unbound variable
 set -o pipefail  # don't hide errors within pipes
 
 script_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+template_dir="${script_dir}/templates/render"
 
 convert_md_to_pdf() {
     local markdown_file="$1"
@@ -23,9 +24,9 @@ convert_md_to_pdf() {
     pandoc "$markdown_file" \
         -o "$output_dir/$filename_noext.pdf" \
         --pdf-engine=lualatex \
-        -H "$script_dir/general_header.sty" \
-        -H "$script_dir/teko_header.sty" \
-        --lua-filter="$script_dir/table.lua"
+        -H "$template_dir/general_header.sty" \
+        -H "$template_dir/teko_header.sty" \
+        --lua-filter="$template_dir/table.lua"
 
     echo "Converted $markdown_file to $output_dir/$filename_noext.pdf"
 }
