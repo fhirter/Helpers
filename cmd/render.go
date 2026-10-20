@@ -12,7 +12,6 @@ import (
 var renderCmd = &cobra.Command{
 	Use:   "render",
 	Short: "Render markdown to pdf",
-	Long:  `Render markdown to pdf by running render.sh`,
 	Run: func(cmd *cobra.Command, args []string) {
 		var option1 string
 		if len(args) > 0 {
