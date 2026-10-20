@@ -1,6 +1,10 @@
 package cmd
 
 import (
+	"os"
+	"os/exec"
+	"path/filepath"
+
 	"github.com/spf13/cobra"
 )
 
@@ -14,20 +18,24 @@ var renderCmd = &cobra.Command{
 		if len(args) > 0 {
 			option1 = args[0]
 		}
-		runScript("scripts/render.sh", option1)
+		err := runRenderScript(option1)
+		if err != nil {
+			return
+		}
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(renderCmd)
+}
 
-	// Here you will define your flags and configuration settings.
+func runRenderScript(option1 string) error {
+	scriptPath := filepath.Join(assetsDir, "render.sh")
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// renderCmd.PersistentFlags().String("foo", "", "A help for foo")
+	cmd := exec.Command("sh", scriptPath, option1)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Stdin = os.Stdin
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// renderCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	return cmd.Run()
 }
