@@ -10,10 +10,17 @@
 \pagestyle{fancy}
 \fancyhf{} % clear default header/footer
 
-
 \defaultfontfeatures{Scale=MatchLowercase}
 
-\setmainfont{Verdana}
+\directlua{
+  luaotfload.add_fallback("symbolfallback", {
+    "Symbola:mode=node"
+  })
+}
+
+\setmainfont{Verdana}[
+  RawFeature={fallback=symbolfallback}
+]
 \setmonofont{Courier}
 \newfontfamily\headingfont{Verdana}
 
